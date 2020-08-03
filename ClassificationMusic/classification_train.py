@@ -48,10 +48,10 @@ class MusicalClassifier:
         :param dropp_lr_epoch: numbers of epoch when lr is dropped by 10
         """
         self.data_train = Data(train, fps=fps)
-        self.trainloader = DataLoader(self.data_train, batch_size=batch_size, shuffle=True)
+        self.trainloader = DataLoader(self.data_train, batch_size=batch_size, shuffle=True, num_workers=8)
 
         self.data_val = Data(val, sec=sec, fps=fps)
-        self.valloader = DataLoader(self.data_val, batch_size=1, shuffle=True)
+        self.valloader = DataLoader(self.data_val, batch_size=1, shuffle=True, num_workers=8)
         self.device = device
         self.p_name = p_name
         self.epoch = epoch
@@ -159,6 +159,7 @@ def frame_feature_extractor(S):
     chunk_num = int(S.shape[0] / 128)
     mel_chunks = np.split(S, chunk_num)  # create 128 * 128 data frames
     return mel_chunks, chunk_num
+
 
 def train_net(arg_list):
     data_train, data_val, device_name, p_name, batch_size, classifier_model, dropp_lr_epoch = arg_list
