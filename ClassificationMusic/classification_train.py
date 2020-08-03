@@ -218,9 +218,9 @@ if __name__ == "__main__":
     data_train, data_test = train_test_split(data, test_size=0.2)
     data_val, data_test = train_test_split(data_test, test_size=0.5)
 
-    arg_list = [(data_train, data_val, 'cuda:0', '0', 4, CnnModel, [None]),
-                (data_train, data_val, 'cuda:1', '1', 4, CrnnModel, [None]),
-                (data_train, data_val, 'cuda:0', '2', 2, CrnnLongModel, [None])]
+    arg_list = [(data_train, data_val, 'cuda:0', '0', 128, CnnModel, [None]),
+                (data_train, data_val, 'cuda:1', '1', 128, CrnnModel, [None]),
+                (data_train, data_val, 'cuda:0', '2', 128, CrnnLongModel, [None])]
 
     # mp = multiprocessing.Pool(processes=22)
     # mp.map(train_net, arg_list)
